@@ -11,6 +11,7 @@ import Results from '@/components/Results';
 
 const api_key = 'EwQCHDTYU2onchg4pwYQmRFRcugz5ySa';
 const trendingGiphsAPI = `http://api.giphy.com/v1/gifs/trending?api_key=${api_key}&limit=20`;
+const searchAPI = `http://api.giphy.com/v1/gifs/search?api_key=${api_key}`;
 
 export default {
   name: 'app',
@@ -25,7 +26,15 @@ export default {
   },
   methods: {
     searchValue(value) {
-      console.log(value);
+
+      fetch(`${searchAPI}&q=${value}`)
+      .then(res => res.json())
+      .then(res => {
+        this.results = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
     },
   },
   beforeMount() {
@@ -33,8 +42,6 @@ export default {
       .then(res => res.json())
       .then(res => {
         this.results = res.data;
-
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
