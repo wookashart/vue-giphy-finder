@@ -4,7 +4,7 @@
       <ul class="giphs-list">
         <li v-for="(item, index) in this.results" :key="index">
           <div>
-            <img :src="item.images.downsized_medium.url" />
+            <img :src="item.images.fixed_height_downsampled.url" />
           </div>
         </li>
       </ul>
