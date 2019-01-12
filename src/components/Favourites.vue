@@ -31,7 +31,6 @@ export default {
   props: {
     favourites: {
       type: Array,
-      required: true,
     }
   }
 }
