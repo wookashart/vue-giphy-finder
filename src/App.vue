@@ -2,7 +2,7 @@
   <div id="app">
     <search-bar @searchValue="searchValue" />
     <results :results="results" @searchGifs="searchGifs" />
-    <favourites :favourites="favourite" />
+    <favourites :favourites="favourite" @searchGifs="searchGifs" />
   </div>
 </template>
 

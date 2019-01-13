@@ -13,6 +13,9 @@
           <div>
             <img :src="item.gif" />
           </div>
+          <span class="remove-from-favourite" @click="removeFromFavourite(item)">
+            <i class="fas fa-times"></i>
+          </span>
         </Slide>
       </Carousel>
     </div>
@@ -32,7 +35,21 @@ export default {
     favourites: {
       type: Array,
     }
-  }
+  },
+  methods: {
+    removeFromFavourite(item) {
+      const storedFavourites = JSON.parse(localStorage.getItem('favouritesGiphy'));
+
+      storedFavourites.map((gif, index) => {
+        if (gif.id === item.id) {
+          storedFavourites.splice(index, 1);
+        };
+      });
+
+      localStorage.setItem('favouritesGiphy', JSON.stringify(storedFavourites));
+      this.$emit('searchGifs');
+    },
+  },
 }
 </script>
 
@@ -53,9 +70,11 @@ export default {
 
   .VueCarousel-slide {
     padding: 7.5px;
+    position: relative;
     
     > div {
       padding: 15px;
+      padding-top: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -65,6 +84,14 @@ export default {
 
     img {
       max-width: 100%;
+    }
+
+    .remove-from-favourite {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 20px;
     }
   }
 </style>
